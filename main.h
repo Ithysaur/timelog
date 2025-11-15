@@ -1,5 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
+
 #include <fstream>
 #include <filesystem>
 #include <iostream>
@@ -8,6 +9,12 @@
 #include <vector>
 #include <cmath>
 
+#ifdef _MSC_VER
+#define ROOT_DIRECTORY "C:/"
+#else
+#define ROOT_DIRECTORY "/"
+#endif
+
 enum clearOptions
 {
 	CLEAR_TIMES,
@@ -15,7 +22,7 @@ enum clearOptions
 	CLEAR_ALL
 };
 
-const void clear(clearOptions clearInput, const std::string& user);
+void clear(clearOptions clearInput, const std::string& user);
 std::vector<unsigned int> processLog(std::ifstream& logname);
-const void printUsage();
+void printUsage();
 #endif

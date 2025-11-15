@@ -1,20 +1,20 @@
 #include "main.h"
 
-const void clear(clearOptions clearInput, const std::string& user)
+void clear(clearOptions clearInput, const std::string& user)
 {
 	switch (clearInput)
 	{
 	case CLEAR_ALL:
-		std::filesystem::remove_all("C:\\Users\\" + user + "\\log\\timelog");
-		std::filesystem::create_directories("C:\\Users\\" + user + "\\log\\timelog");
+		std::filesystem::remove_all(std::string(ROOT_DIRECTORY) + "Users/" + user + "/log/timelog");
+		std::filesystem::create_directories(std::string(ROOT_DIRECTORY) + "Users/" + user + "/log/timelog");
 		break;
 	case CLEAR_TIMES:
-		std::filesystem::remove_all("C:\\Users\\" + user + "\\log\\timelog\\times");
-		std::filesystem::create_directories("C:\\Users\\" + user + "\\log\\timelog\\times");
+		std::filesystem::remove_all(std::string(ROOT_DIRECTORY) + "Users/" + user + "/log/timelog/times");
+		std::filesystem::create_directories(std::string(ROOT_DIRECTORY) + "Users/" + user + "/log/timelog/times");
 		break;
 	case CLEAR_REPORTS:
-		std::filesystem::remove_all("C:\\Users\\" + user + "\\log\\timelog\\reports");
-		std::filesystem::create_directories("C:\\Users\\" + user + "\\log\\timelog\\reports");
+		std::filesystem::remove_all(std::string(ROOT_DIRECTORY) + "Users/" + user + "/log/timelog/reports");
+		std::filesystem::create_directories(std::string(ROOT_DIRECTORY) + "Users/" + user + "/log/timelog/reports");
 		break;
 	}
 }
@@ -42,7 +42,7 @@ std::vector<unsigned int> processLog(std::ifstream& logname)
 	return reportData;
 }
 
-const void printUsage()
+void printUsage()
 {
 	std::cerr << "valid usage: timelog <username> --log <logname> | --report [logname|all] | --clear [all|times|reports]" << std::endl;
 }

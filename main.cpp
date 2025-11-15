@@ -14,20 +14,20 @@ int main(int argc, char* argv[])
 
 		static const std::string username = std::string(argv[1]);
 
-		if (!std::filesystem::exists("C:\\Users\\" + username))
+		if (!std::filesystem::exists(std::string(ROOT_DIRECTORY) + "Users/" + username))
 		{
 			std::cerr << "error: user does not exist" << std::endl;
 			return 2;
 		}
 
-		if (!std::filesystem::exists("C:\\Users\\" + username + "\\log\\timelog\\times"))
+		if (!std::filesystem::exists(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/times"))
 		{
-			std::filesystem::create_directories("C:\\Users\\" + username + "\\log\\timelog\\times");
+			std::filesystem::create_directories(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/times");
 		}
 
-		if (!std::filesystem::exists("C:\\Users\\" + username + "\\log\\timelog\\reports"))
+		if (!std::filesystem::exists(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/reports"))
 		{
-			std::filesystem::create_directories("C:\\Users\\" + username + "\\log\\timelog\\reports");
+			std::filesystem::create_directories(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/reports");
 		}
 
 		static const std::string flag = std::string(argv[2]);
@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
 
 		if (flag == "--log" || flag == "-l")
 		{
-			static std::ofstream log("C:\\Users\\" + username + "\\log\\timelog\\times\\" + arg3 + ".txt", std::ios::app);
+			static std::ofstream log(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/times/" + arg3 + ".txt", std::ios::app);
 
 			if (!log.is_open())
 			{
@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
 		{
 			if (arg3 == "all")
 			{
-				for (const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator("C:\\Users\\" + username + "\\log\\timelog\\times"))
+				for (const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/times"))
 				{
 					std::ifstream log(entry.path());
 
@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
 						return 3;
 					}
 
-					std::ofstream report("C:\\Users\\" + username + "\\log\\timelog\\reports\\" + entry.path().filename().string());
+					std::ofstream report(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/reports/" + entry.path().filename().string());
 					//std::cout << "lol" << std::endl;
 					if (!report.is_open())
 					{
@@ -117,7 +117,7 @@ int main(int argc, char* argv[])
 			}
 			else
 			{
-				static std::ifstream log("C:\\Users\\" + username + "\\log\\timelog\\times\\" + arg3 + ".txt");
+				static std::ifstream log(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/times/" + arg3 + ".txt");
 
 				if (!log.is_open())
 				{
@@ -125,7 +125,7 @@ int main(int argc, char* argv[])
 					return 3;
 				}
 
-				static std::ofstream report("C:\\Users\\" + username + "\\log\\timelog\\reports\\" + arg3 + ".txt");
+				static std::ofstream report(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/reports/" + arg3 + ".txt");
 
 				if (!report.is_open())
 				{

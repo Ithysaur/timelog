@@ -1,5 +1,5 @@
 #timelog
-Timelog is a simple command-line tool for tracking time spent on various tasks and projects. It allows users to log time entries. Data is stored in C:\Users\<username>\log\timelog
+Timelog is a simple command-line tool for tracking time spent on various tasks and projects. It allows users to log time entries. Data is stored in C:/Users/<username>/log/timelog
 Valid Usage: timelog <username> <--log <logname> | --report [logname|all] | --clear [times|reports|all]>
 ##username
 The username must be a valid user profile on the system.
