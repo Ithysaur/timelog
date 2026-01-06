@@ -76,8 +76,9 @@ int main(int argc, char* argv[])
 					const unsigned short reportSize = reportResults.size();
 					unsigned short minimum = reportResults[0];
 					unsigned short maximum = 0;
-					float mean = 0;
-					float stddev = 0;
+					static float mean = 0;
+					static float stddev = 0;
+					static unsigned short total = 0;
 
 					for (const unsigned short& item : reportResults)
 					{
@@ -99,16 +100,17 @@ int main(int argc, char* argv[])
 
 					report << "Report of " << entry.path().filename().string() << std::endl;
 					report << "Entries: " << reportSize << std::endl;
-					report << "Average time: " << mean << " seconds" << std::endl;
-					report << "Maximum time: " << maximum << " seconds" << std::endl;
-					report << "Minimum time: " << minimum << " seconds" << std::endl;
-					report << "Standard Deviation: " << stddev << " seconds" << std::endl;
+					report << "Total time: " << total/3600 << " hours" << std::endl;
+					report << "Average time: " << mean/60 << " minutes" << std::endl;
+					report << "Maximum time: " << maximum/60 << " minutes" << std::endl;
+					report << "Minimum time: " << minimum/60 << " minutes" << std::endl;
+					report << "Standard Deviation: " << stddev/60 << " minutes" << std::endl;
 					report << std::endl;
 					report << "Full report:" << std::endl;
 
 					for (const unsigned short& item : reportResults)
 					{
-						report << item << " seconds" << std::endl;
+						report << item/60 << " minutes" << std::endl;
 					}
 
 					report.close();
@@ -138,8 +140,9 @@ int main(int argc, char* argv[])
 				static const unsigned short reportSize = reportResults.size();
 				static unsigned short minimum = reportResults[0];
 				static unsigned short maximum = 0;
-				static unsigned short mean = 0;
-				static unsigned short stddev = 0;
+				static float mean = 0;
+				static float stddev = 0;
+				static unsigned short total = 0;
 
 				for (const unsigned short& item : reportResults)
 				{
@@ -162,16 +165,17 @@ int main(int argc, char* argv[])
 
 				report << "Report of " << arg3 << std::endl;
 				report << "Entries: " << reportSize << std::endl;
-				report << "Average time: " << mean << " seconds" << std::endl;
-				report << "Maximum time: " << maximum << " seconds" << std::endl;
-				report << "Minimum time: " << minimum << " seconds" << std::endl;
-				report << "Standard Deviation: " << stddev << " seconds" << std::endl;
+				report << "Total time: " << total/3600 << " hours" << std::endl;
+				report << "Average time: " << mean/60 << " minutes" << std::endl;
+				report << "Maximum time: " << maximum/60 << " minutes" << std::endl;
+				report << "Minimum time: " << minimum/60 << " minutes" << std::endl;
+				report << "Standard Deviation: " << stddev/60 << " minutes" << std::endl;
 				report << std::endl;
 				report << "Full report:" << std::endl;
 				
 				for (const unsigned short& item : reportResults)
 				{
-					report << item << " seconds" << std::endl;
+					report << item/60 << " minutes" << std::endl;
 				}
 
 				report.close();
