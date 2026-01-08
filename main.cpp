@@ -55,131 +55,13 @@ int main(int argc, char* argv[])
 			{
 				for (const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/times"))
 				{
-					std::ifstream log(entry.path());
-
-					if (!log.is_open())
-					{
-						std::cerr << "error: could not open log file" << std::endl;
-						return 3;
-					}
-
-					std::ofstream report(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/reports/" + entry.path().filename().string());
-					//std::cout << "lol" << std::endl;
-					if (!report.is_open())
-					{
-						std::cerr << "error: could not open report file" << std::endl;
-						return 4;
-					}
-
-					std::vector<unsigned int> reportResults = processLog(log);
-					log.close();
-					const unsigned short reportSize = reportResults.size();
-					unsigned short minimum = reportResults[0];
-					unsigned short maximum = 0;
-					static float mean = 0;
-					static float stddev = 0;
-					static unsigned short total = 0;
-
-					for (const unsigned short& item : reportResults)
-					{
-						if (item > maximum)
-						{
-							maximum = item;
-						}
-						else if (item < minimum)
-						{
-							minimum = item;
-						}
-						mean += item / reportSize;
-					}
-
-					for (const unsigned short& item : reportResults)
-					{
-						stddev += abs((mean - item) / reportSize);
-					}
-
-					report << "Report of " << entry.path().filename().string() << std::endl;
-					report << "Entries: " << reportSize << std::endl;
-					report << "Total time: " << total/3600 << " hours" << std::endl;
-					report << "Average time: " << mean/60 << " minutes" << std::endl;
-					report << "Maximum time: " << maximum/60 << " minutes" << std::endl;
-					report << "Minimum time: " << minimum/60 << " minutes" << std::endl;
-					report << "Standard Deviation: " << stddev/60 << " minutes" << std::endl;
-					report << std::endl;
-					report << "Full report:" << std::endl;
-
-					for (const unsigned short& item : reportResults)
-					{
-						report << item/60 << " minutes" << std::endl;
-					}
-
-					report.close();
+					reportTimelog(entry.path().filename().string(), username);
 				}
 				return 0;
 			}
 			else
 			{
-				static std::ifstream log(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/times/" + arg3 + ".txt");
-
-				if (!log.is_open())
-				{
-					std::cerr << "error: could not open specified log file" << std::endl;
-					return 3;
-				}
-
-				static std::ofstream report(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/reports/" + arg3 + ".txt");
-
-				if (!report.is_open())
-				{
-					std::cerr << "error: could not open report file" << std::endl;
-					return 4;
-				}
-
-				static std::vector<unsigned int> reportResults = processLog(log);
-				log.close();
-				static const unsigned short reportSize = reportResults.size();
-				static unsigned short minimum = reportResults[0];
-				static unsigned short maximum = 0;
-				static float mean = 0;
-				static float stddev = 0;
-				static unsigned short total = 0;
-
-				for (const unsigned short& item : reportResults)
-				{
-					if (item > maximum)
-					{
-						maximum = item;
-					}
-					else if (item < minimum)
-					{
-						minimum = item;
-					}
-
-					mean += item / reportSize;
-				}
-
-				for (const unsigned short& item : reportResults)
-				{
-					stddev += abs((mean - item) / reportSize);
-				}
-
-				report << "Report of " << arg3 << std::endl;
-				report << "Entries: " << reportSize << std::endl;
-				report << "Total time: " << total/3600 << " hours" << std::endl;
-				report << "Average time: " << mean/60 << " minutes" << std::endl;
-				report << "Maximum time: " << maximum/60 << " minutes" << std::endl;
-				report << "Minimum time: " << minimum/60 << " minutes" << std::endl;
-				report << "Standard Deviation: " << stddev/60 << " minutes" << std::endl;
-				report << std::endl;
-				report << "Full report:" << std::endl;
-				
-				for (const unsigned short& item : reportResults)
-				{
-					report << item/60 << " minutes" << std::endl;
-				}
-
-				report.close();
-				return 0;
+				reportTimelog(arg3, username);
 			}
 		}
 

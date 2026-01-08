@@ -24,5 +24,6 @@ enum clearOptions
 
 void clear(clearOptions clearInput, const std::string& user);
 std::vector<unsigned int> processLog(std::ifstream& logname);
+void reportTimelog(std::string filename, std::string username);
 void printUsage();
 #endif
