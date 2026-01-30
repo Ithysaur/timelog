@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
 
 			if (!log.is_open())
 			{
-				std::cerr << "error: could not open specified log file" << std::endl;
+				std::cerr << "error: could not open or failed to create specified log file" << std::endl;
 				return 3;
 			}
 
@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
 			}
 			else
 			{
-				reportTimelog(arg3, username);
+				reportTimelog(arg3 + ".txt", username);
 			}
 		}
 

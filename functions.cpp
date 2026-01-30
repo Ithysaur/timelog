@@ -44,7 +44,7 @@ std::vector<unsigned int> processLog(std::ifstream& logname)
 
 void reportTimelog(std::string filename, std::string username)
 {
-	static std::ifstream log(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/times/" + filename + ".txt");
+	static std::ifstream log(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/times/" + filename);
 
 	if (!log.is_open())
 	{
@@ -110,6 +110,7 @@ void reportTimelog(std::string filename, std::string username)
 		}
 
 		mean += item / reportSize;
+		total += item;
 	}
 
 	for (const unsigned short& item : reportResults)
@@ -129,7 +130,7 @@ void reportTimelog(std::string filename, std::string username)
 
 	for (unsigned int i = 0; i < reportResults.size(); i++)
 	{
-		report << reportTimestamps[i] << reportResults[i] / 60 << " minutes" << std::endl;
+		report << reportTimestamps[i] << ":" << reportResults[i] / 60 << " minutes" << std::endl;
 	}
 
 	report.close();
