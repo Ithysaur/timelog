@@ -5,16 +5,16 @@ void clear(clearOptions clearInput, const std::string& user)
 	switch (clearInput)
 	{
 	case CLEAR_ALL:
-		std::filesystem::remove_all(std::string(ROOT_DIRECTORY) + "HOME_DIRECTORY/" + user + "/log/timelog");
-		std::filesystem::create_directories(std::string(ROOT_DIRECTORY) + "HOME_DIRECTORY/" + user + "/log/timelog");
+		std::filesystem::remove_all(std::string(ROOT_DIRECTORY) + HOME_DIRECTORY + user + "/log/timelog");
+		std::filesystem::create_directories(std::string(ROOT_DIRECTORY) + HOME_DIRECTORY + user + "/log/timelog");
 		break;
 	case CLEAR_TIMES:
-		std::filesystem::remove_all(std::string(ROOT_DIRECTORY) + "HOME_DIRECTORY/" + user + "/log/timelog/times");
-		std::filesystem::create_directories(std::string(ROOT_DIRECTORY) + "HOME_DIRECTORY/" + user + "/log/timelog/times");
+		std::filesystem::remove_all(std::string(ROOT_DIRECTORY) + HOME_DIRECTORY + user + "/log/timelog/times");
+		std::filesystem::create_directories(std::string(ROOT_DIRECTORY) + HOME_DIRECTORY + user + "/log/timelog/times");
 		break;
 	case CLEAR_REPORTS:
-		std::filesystem::remove_all(std::string(ROOT_DIRECTORY) + "HOME_DIRECTORY/" + user + "/log/timelog/reports");
-		std::filesystem::create_directories(std::string(ROOT_DIRECTORY) + "HOME_DIRECTORY/" + user + "/log/timelog/reports");
+		std::filesystem::remove_all(std::string(ROOT_DIRECTORY) + HOME_DIRECTORY + user + "/log/timelog/reports");
+		std::filesystem::create_directories(std::string(ROOT_DIRECTORY) + HOME_DIRECTORY + user + "/log/timelog/reports");
 		break;
 	}
 }
@@ -44,7 +44,7 @@ std::vector<unsigned int> processLog(std::ifstream& logname)
 
 void reportTimelog(std::string filename, std::string username)
 {
-	static std::ifstream log(std::string(ROOT_DIRECTORY) + "HOME_DIRECTORY/" + username + "/log/timelog/times/" + filename);
+	static std::ifstream log(std::string(ROOT_DIRECTORY) + HOME_DIRECTORY + username + "/log/timelog/times/" + filename);
 
 	if (!log.is_open())
 	{
@@ -52,7 +52,7 @@ void reportTimelog(std::string filename, std::string username)
 		return;
 	}
 
-	static std::ofstream report(std::string(ROOT_DIRECTORY) + "HOME_DIRECTORY/" + username + "/log/timelog/reports/" + filename);
+	static std::ofstream report(std::string(ROOT_DIRECTORY) + HOME_DIRECTORY + username + "/log/timelog/reports/" + filename);
 
 	if (!report.is_open())
 	{
