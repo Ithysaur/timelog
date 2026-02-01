@@ -52,7 +52,7 @@ void reportTimelog(std::string filename, std::string username)
 		return;
 	}
 
-	static std::ofstream report(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/reports/" + filename + ".txt");
+	static std::ofstream report(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/reports/" + filename);
 
 	if (!report.is_open())
 	{
@@ -130,7 +130,7 @@ void reportTimelog(std::string filename, std::string username)
 
 	for (unsigned int i = 0; i < reportResults.size(); i++)
 	{
-		report << reportTimestamps[i] << ":" << reportResults[i] / 60 << " minutes" << std::endl;
+		report << reportTimestamps[i] << ": " << reportResults[i] / 60 << " minutes" << std::endl;
 	}
 
 	report.close();
