@@ -11,8 +11,10 @@
 
 #ifdef _MSC_VER
 #define ROOT_DIRECTORY "C:/"
+#define HOME_DIRECTORY users
 #else
 #define ROOT_DIRECTORY "/"
+#define HOME_DIRECTORY home
 #endif
 
 enum clearOptions

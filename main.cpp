@@ -14,20 +14,20 @@ int main(int argc, char* argv[])
 
 		static const std::string username = std::string(argv[1]);
 
-		if (!std::filesystem::exists(std::string(ROOT_DIRECTORY) + "Users/" + username))
+		if (!std::filesystem::exists(std::string(ROOT_DIRECTORY) + "HOME_DIRECTORY/" + username))
 		{
 			std::cerr << "error: user does not exist" << std::endl;
 			return 2;
 		}
 
-		if (!std::filesystem::exists(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/times"))
+		if (!std::filesystem::exists(std::string(ROOT_DIRECTORY) + "HOME_DIRECTORY/" + username + "/log/timelog/times"))
 		{
-			std::filesystem::create_directories(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/times");
+			std::filesystem::create_directories(std::string(ROOT_DIRECTORY) + "HOME_DIRECTORY/" + username + "/log/timelog/times");
 		}
 
-		if (!std::filesystem::exists(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/reports"))
+		if (!std::filesystem::exists(std::string(ROOT_DIRECTORY) + "HOME_DIRECTORY/" + username + "/log/timelog/reports"))
 		{
-			std::filesystem::create_directories(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/reports");
+			std::filesystem::create_directories(std::string(ROOT_DIRECTORY) + "HOME_DIRECTORY/" + username + "/log/timelog/reports");
 		}
 
 		static const std::string flag = std::string(argv[2]);
@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
 
 		if (flag == "--log" || flag == "-l")
 		{
-			static std::ofstream log(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/times/" + arg3 + ".txt", std::ios::app);
+			static std::ofstream log(std::string(ROOT_DIRECTORY) + "HOME_DIRECTORY/" + username + "/log/timelog/times/" + arg3 + ".txt", std::ios::app);
 
 			if (!log.is_open())
 			{
@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
 		{
 			if (arg3 == "all")
 			{
-				for (const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(std::string(ROOT_DIRECTORY) + "Users/" + username + "/log/timelog/times"))
+				for (const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(std::string(ROOT_DIRECTORY) + "HOME_DIRECTORY/" + username + "/log/timelog/times"))
 				{
 					reportTimelog(entry.path().filename().string(), username);
 				}
